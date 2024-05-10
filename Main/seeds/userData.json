@@ -1,0 +1,22 @@
+[
+  {
+    "name": "carrots",
+    "price": "5"
+  },
+  {
+    "name": "goats",
+    "price":"2000"
+  },
+  {
+    "name": "jackets",
+    "price": "80"
+  },
+  {
+    "name": "shoes",
+    "price": "90"
+  },
+  {
+    "name": "hat",
+    "price": "20"
+  }
+]
