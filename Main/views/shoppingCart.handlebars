@@ -4,15 +4,23 @@
         {{#each Products as |Product| }}
             <div class="row col-sm-6">
               <div class="col-sm-4 ml-1">
-                <h3>{{Product.name}}</h3>
+                <h3>{{Product.product_name}}</h3>
               </div>
               <div class="col-sm-2 ml-1 ">
                 <h3>{{Product.price}}</h3>
               </div>
             </div>
         {{/each}}
+        {{#each Customers as |Customer| }}
+            <div class="row col-sm-6">
+              <div class="col-sm-4 ml-1">
+                <h3>{{Customer.first_name}}, {{Customer.last_name}}</h3>
+              </div>
+            </div>
+        {{/each}}
       </div>
       <div class="col">
+        
         <p class="font-weight-bold">Order Summary</p><br>
         <p>Order Subtotal:</p><br>
         <p>Tax:</p><br>
@@ -22,4 +30,6 @@
       </div>
     </div>
 </main>
+
+
 

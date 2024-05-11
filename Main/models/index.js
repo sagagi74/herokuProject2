@@ -1,32 +1,32 @@
 const Product = require('./Items');
-const Customers = require('./customers');
-const TransactionsMains = require('./transactionmains');
-const TransactionsDetails = require('./transactiondetails');
+const Customer = require('./customers');
+const TransactionsMain = require('./transactionmains');
+const TransactionsDetail = require('./transactiondetails');
 
-Customers.hasOne(TransactionsMains, {
+Customer.hasOne(TransactionsMain, {
     foreignKey: 'customer_id',
     onDelete: 'CASCADE'
 });
 
-TransactionsMains.belongsTo(Customers, {
+TransactionsMain.belongsTo(Customer, {
     foreignKey: 'customer_id',
 });
 
-TransactionsMains.hasOne(TransactionsDetails, {
+TransactionsMain.hasOne(TransactionsDetail, {
     foreignKey: 'transaction_id',
     onDelete: 'CASCADE'
 });
 
-TransactionsDetails.belongsTo(TransactionsMains, {
+TransactionsDetail.belongsTo(TransactionsMain, {
     foreignKey: 'transaction_id',
 });
 
-Product.hasOne(TransactionsDetails, {
+Product.hasOne(TransactionsDetail, {
     foreignKey: 'product_id',
     onDelete: 'CASCADE'
 });
 
-TransactionsDetails.belongsTo(Product, {
+TransactionsDetail.belongsTo(Product, {
     foreignKey: 'product_id',
 });
 
@@ -34,8 +34,8 @@ TransactionsDetails.belongsTo(Product, {
 module.exports = 
 {   
     Product,
-    Customers,
-    TransactionsMains,
-    TransactionsDetails 
+    Customer,
+    TransactionsMain,
+    TransactionsDetail
 };
     
