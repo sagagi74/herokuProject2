@@ -10,7 +10,7 @@ router.get('/',  async (req, res) => {
     const Item = itemData.map((project) => project.get({ plain: true }));
     console.log(Item);
     res.render('homepage', {
-      Item
+      Item,
     });
   } catch (err) {
     res.status(500).json(err);
