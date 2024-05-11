@@ -20,7 +20,7 @@ TransactionsMains.init(
         allowNull: false,
         references: {
           model: 'customers',
-          key: 'id',
+          key: 'customer_id',
         },
       },
       created_date: {

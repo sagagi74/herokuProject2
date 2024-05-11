@@ -8,7 +8,7 @@ router.get('/',  async (req, res) => {
       order: [['name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    res.render('homepage', {
+    res.render('shoppingCart', {
       Products,
     });
   } catch (err) {
