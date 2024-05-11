@@ -1,16 +1,15 @@
 const router = require('express').Router();
-const { Items } = require('../models');
+const { Product } = require('../models');
 
 
 router.get('/',  async (req, res) => {
   try {
-    const itemData = await Items.findAll({
+    const productData = await Product.findAll({
       order: [['name', 'ASC']],
     });
-    const Item = itemData.map((project) => project.get({ plain: true }));
-    console.log(Item);
+    const Products = productData.map((project) => project.get({ plain: true }));
     res.render('homepage', {
-      Item,
+      Products,
     });
   } catch (err) {
     res.status(500).json(err);
