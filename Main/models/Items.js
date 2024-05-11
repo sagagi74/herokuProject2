@@ -1,23 +1,30 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Items extends Model {}
+class Product extends Model {};
 
-Items.init(
+Product.init(
   {
-    id: {
+    product_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    product_name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    product_description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    product_url:{
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: false,
     },
   },
@@ -26,8 +33,8 @@ Items.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'items',
+    modelName: 'products',
   }
 )
 
-module.exports = Items;
+module.exports = Product;
