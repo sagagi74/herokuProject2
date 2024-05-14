@@ -1,77 +1,43 @@
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In and Sign Up Form</title>
-  <link rel="stylesheet" href="../public">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
-
-<div>
-    <div id="navbarSection">
-        <nav>
-        <a href="#">Categories</a>
-        <button class="btnLogin">Login</button>
-        </nav>
-    </div>
+<div class="row justify-space-between-md">
+  <div class="login-card">
+    <h2 class="page-title">Login</h2>
+    <form class="form login-form">
+      <div class="form-group">
+        <label for="email-login">Email:</label>
+        <input class="form-input" type="text" id="email-login" />
+      </div>
+      <div class="form-group">
+        <label for="password-login">Password:</label>
+        <input class="form-input" type="password" id="password-login" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">login</button>
+      </div>
+    </form>
+  </div>
+  <div class="login-card">
+    <h2 class="page-title">Signup</h2>
+    <form class="form signup-form">
+      <div class="form-group">
+        <label for="username-signup">Username:</label>
+        <input class="form-input" type="text" id="username-signup" />
+      </div>
+      <div class="form-group">
+        <label for="email-signup">Email:</label>
+        <input class="form-input" type="text" id="email-signup" />
+      </div>
+      <div class="form-group">
+        <label for="password-signup">Password:</label>
+        <input class="form-input" type="password" id="password-signup" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">signup</button>
+      </div>
+    </form>
+  </div>
 </div>
 
-  <div class="wrapper">
-    <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
-    <div class="form-box login">
-      <h2>Login</h2>
-      <form>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input id="email-login" type="email" required>
-          <label>Email</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input id="password-login" type="password" required>
-          <label>Password</label>
-        </div>
-        <div class="remember-forgot">
-          <label><input type="checkbox"> Remember me</label>
-          <a href="#">Forgot Password?</a>
-        </div>
-        <button type="button" class="btn login-form-submit">Login</button>
-        <div class="login_register">
-          <p>Don't have an account?<a href="#" class="register_link"> Register</a></p>
-        </div>
-      </form>
-    </div>
-
-    <div class="form-box register">
-      <h2>Registration</h2>
-      <form>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-          <input id="create-username-login" type="text" required>
-          <label>Username</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input id="create-email-login" type="email" required>
-          <label>Email</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input id="create-password-login" type="password" required>
-          <label>Password</label>
-        </div>
-        <div class="remember-forgot">
-          <label><input type="checkbox"> I agree to the terms & conditions</label>
-        </div>
-        <button type="button" class="btn register_submit">Register</button>
-        <div class="login_register">
-          <p>Already have an account?<a href="#" class="login_link"> Login</a></p>
-        </div>
-      </form>
-    </div>
-  </div>
+<script src="/js/login.js"></script>
 
 <section class="container h-100">
     <div class="row mb-4" style="height: 200px;">
@@ -140,10 +106,3 @@
         </div>
     </div>
 </section>
-
-  <script src="/assets/loginButtons.js"></script>
-  <script src="/assets/loginVerify.js"></script>
-  <script src="/assets/loginCreate.js"></script>
-
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
