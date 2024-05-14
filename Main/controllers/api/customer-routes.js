@@ -5,7 +5,8 @@ const { Customer } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const dbCustomerData = await Customer.create({
-      username: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
     });
@@ -37,8 +38,6 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await dbCustomerData.checkPassword(req.body.password);
-    console.log(validPassword);
-    console.log(req.body.password);
 
     if (!validPassword) {
       res
