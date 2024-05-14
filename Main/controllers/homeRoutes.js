@@ -2,13 +2,13 @@ const router = require('express').Router();
 const { Product } = require('../models');
 const { Customer } = require('../models');
 
-router.get('/', (req, res) => {
-  res.render('login', {
-    title: 'Login'
-  });
-});
+// router.get('/', (req, res) => {
+//   res.render('login', {
+//     title: 'Login'
+//   });
+// });
 
-router.get('/products', (req, res) => {
+router.get('/', (req, res) => {
   res.render('productsPage', { title: 'Products' });
 });
 
