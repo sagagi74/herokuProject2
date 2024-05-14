@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     const dbCustomerData = await Customer.create({
       username: req.body.username,
       email: req.body.email,
-      passwords: req.body.passwords,
+      password: req.body.password,
     });
 
     // Set up sessions with a 'loggedIn' variable set to `true`
@@ -24,12 +24,10 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
+  console.log(req, res);
   try {
-    const dbCustomerData = await Customer.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
+    const dbCustomerData = await Customer.findOne({ where: { email: req.body.email } });
+    console.log(dbCustomerData);
 
     if (!dbCustomerData) {
       res
@@ -38,7 +36,9 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await dbCustomerData.checkPassword(req.body.passwords);
+    const validPassword = await dbCustomerData.checkPassword(req.body.password);
+    console.log(validPassword);
+    console.log(req.body.password);
 
     if (!validPassword) {
       res

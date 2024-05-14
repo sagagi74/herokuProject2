@@ -2,40 +2,40 @@
   {
     "first_name" : "Gagan",
     "last_name" : "Singh",
-    "email_address" : "gaganjitv@gmail.com",
-    "passwords" : "TeamGoat",
+    "email" : "gaganjitv@gmail.com",
+    "password" : "TeamGoat",
     "session_id" : "100cxbieoyknyq3gq22nqdsl2fd50014"
   },
   {
     "first_name" : "Gary",
     "last_name" : "Wu",
-    "email_address" : "garykachunwu@gmail.com",
-    "passwords" : "TeamGoat",
+    "email" : "garykachunwu@gmail.com",
+    "password" : "TeamGoat",
     "session_id" :  "200cxbieoyknyq3gq22nqdsl2fd50014"
   },{
     "first_name" : "Felix",
-    "last_name" : "Tang", 
-    "email_address" : "fsmunozteng@gmail.com",
-    "passwords" : "TeamGoat",
+    "last_name" : "Teng", 
+    "email" : "fsmunozteng@gmail.com",
+    "password" : "TeamGoat",
     "session_id" :  "300cxbieoyknyq3gq22nqdsl2fd50014"
   },{
     "first_name" : "Saim",
     "last_name" : "Diaz",
-    "email_address" : "odiazstrandberg@gmail.com",
-    "passwords" : "TeamGoat",
+    "email" : "odiazstrandberg@gmail.com",
+    "password" : "TeamGoat",
     "session_id" :  "400cxbieoyknyq3gq22nqdsl2fd50014"
   },{
     "first_name" : "Romulo",
     "last_name" : "Apostol",
-    "email_address" : "romuloapostol@gmail.com",
-    "passwords" : "TeamGoat",
+    "email" : "romuloapostol@gmail.com",
+    "password" : "TeamGoat",
     "session_id" :  "500cxbieoyknyq3gq22nqdsl2fd50014"
   },
   {
     "first_name" : "Yong",
     "last_name" : "Yun",
-    "email_address" : "yongwooyun@hotmail.com",
-    "passwords" : "TeamGoat",
+    "email" : "yongwooyun@hotmail.com",
+    "password" : "TeamGoat",
     "session_id" :  "700cxbieoyknyq3gq22nqdsl2fd50014"
   }
 
