@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Customer } = require('../../models');
 
-// CREATE new user
+// CREATE new customer
 router.post('/', async (req, res) => {
   try {
-    const dbUserData = await User.create({
+    const dbCustomerData = await Customer.create({
       username: req.body.username,
       email: req.body.email,
       passwords: req.body.passwords,
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.status(200).json(dbCustomerData);
     });
   } catch (err) {
     console.log(err);
@@ -25,20 +25,20 @@ router.post('/', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const dbUserData = await User.findOne({
+    const dbCustomerData = await User.findOne({
       where: {
         email: req.body.email,
       },
     });
 
-    if (!dbUserData) {
+    if (!dbCustomerData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
-    const validPassword = await dbUserData.checkPassword(req.body.passwords);
+    const validPassword = await dbCustomerData.checkPassword(req.body.passwords);
 
     if (!validPassword) {
       res
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
       res
         .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+        .json({ customer: dbCustomerData, message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);
