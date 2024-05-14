@@ -10,7 +10,7 @@ const { Customer } = require('../models');
 
 // Login route
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
+  // If the customer is already logged in, redirect to the homepage
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
