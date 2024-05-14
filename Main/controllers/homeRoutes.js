@@ -2,7 +2,17 @@ const router = require('express').Router();
 const { Product } = require('../models');
 const { Customer } = require('../models');
 
-router.get('/',  async (req, res) => {
+router.get('/', (req, res) => {
+  res.render('login', {
+    title: 'Login'
+  });
+});
+
+router.get('/products', (req, res) => {
+  res.render('productsPage', { title: 'Products' });
+});
+
+router.get('/shoppingCart', async (req, res) => {
   try {
     const productData = await Product.findAll({
       order: [['product_name', 'ASC']],
@@ -14,6 +24,7 @@ router.get('/',  async (req, res) => {
     const Customers = customerData.map((project) => project.get({ plain: true }));
 
     res.render('shoppingCart', {
+      title: 'Shopping Cart',
       Products,
       Customers
     });
