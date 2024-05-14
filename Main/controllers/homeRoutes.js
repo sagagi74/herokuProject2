@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product } = require('../models');
-const { Customers } = require('../models');
+const { Customer } = require('../models');
 
 // router.get('/login', (req, res) => {
 //   res.render('login', {
@@ -29,15 +29,15 @@ router.get('/shoppingCart', async (req, res) => {
       order: [['product_name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customers.findAll({
+    const customerData = await Customer.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const Customer = customerData.map((project) => project.get({ plain: true }));
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
       Products,
-      Customers
+      Customer
     });
     
   } catch (err) {
