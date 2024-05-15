@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product } = require('../models');
 const { Customer } = require('../models');
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
 // router.get('/login', (req, res) => {
 //   res.render('login', {
