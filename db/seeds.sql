@@ -41,6 +41,8 @@ VALUES
 INSERT INTO TransactionDetail (Transaction_id, Product_id, ordered)
 VALUES 
   (1, 3, 0),
+  (1, 3, 0),
+  (1, 3, 0),
   
    (1, 4,  0),
 
