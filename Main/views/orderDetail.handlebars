@@ -1,0 +1,33 @@
+  <div class="col">
+        {{#each data as |data| }}
+            <div class="row col-sm-6">
+                <div class="col-sm-4 ml-1">
+                <h3>{{data.transaction_id}}</h3>
+              </div>
+              <div class="col-sm-4 ml-1">
+                <h3>{{data.product_id}}</h3>
+              </div>
+              <div class="col-sm-4 ml-1">
+                <h3>{{data.product_name}}</h3>
+              </div>
+              <div class="col-sm-2 ml-1 ">
+                <h3>{{data.product_description}}</h3>
+              </div>
+              <div class="col-sm-2 ml-1 ">
+                <h3>{{data.total}}</h3>
+              </div>
+              <div class="col-sm-2 ml-1 ">
+                <h3>{{data.product_url}}</h3>
+              </div>
+              <div class="col-sm-2 ml-1 ">
+                <h3>{{data.Qty}}</h3>
+              </div>
+
+
+            </div>
+        {{/each}}
+      
+      </div>
+
+
+      
