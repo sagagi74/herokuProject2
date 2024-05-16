@@ -16,8 +16,26 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/products', (req, res) => {
-  res.render('productsPage', { title: 'Products' });
+router.get('/products', async (req, res) => {
+  try {
+    const productData = await Product.findAll({
+      order: [['product_name', 'ASC']],
+    });
+    const Products = productData.map((project) => project.get({ plain: true }));
+    const customerData = await Customer.findAll({
+      order: [['customer_id', 'ASC']],
+    });
+    const Customers = customerData.map((project) => project.get({ plain: true }));
+
+  res.render('productsPage', { 
+    title: 'Products',
+    Products,
+    Customers 
+  });
+
+} catch (err) {
+  res.status(500).json(err);
+}
 });
 
 router.get('/shoppingCart', async (req, res) => {
