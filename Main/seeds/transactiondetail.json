@@ -4,6 +4,16 @@
         "Product_id": "3", 
         "ordered":  "0"
     },
+    {   
+        "Transaction_id": "1", 
+        "Product_id": "3", 
+        "ordered":  "0"
+    },
+    {   
+        "Transaction_id": "1", 
+        "Product_id": "3", 
+        "ordered":  "0"
+    },
     {
         "Transaction_id": "1", 
         "Product_id": "4", 
