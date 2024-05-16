@@ -19,7 +19,7 @@ TransactionsMains.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'customer',
+          model: 'customers',
           key: 'customer_id',
         },
       },

@@ -1,5 +1,5 @@
 const Product = require('./Items');
-const Customer = require('./customer');
+const Customer = require('./customers');
 const TransactionsMain = require('./transactionmains');
 const TransactionsDetail = require('./transactiondetails');
 
