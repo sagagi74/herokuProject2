@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { Product } = require('../models');
 const { Customer } = require('../models');
+<<<<<<< HEAD
+// const withAuth = require('../utils/auth');
+=======
 const { truncate } = require('../models/Items');
 //adding Auth and
 const withAuth = require('../utils/auth');
@@ -9,15 +12,36 @@ const sequelize = require('../config/connection');
 
 //req.session.loggedIn = true;
 
+>>>>>>> 80c37a0f92324620ef21b332d6ab9a7be1f1582a
 
-router.get('/', (req, res) => {
-  res.render('login', {
-    title: 'Login'
-  });
+// router.get('/login', (req, res) => {
+//   res.render('login', {
+//     title: 'Login'
+//   });
+// });
+
+// Login route
+router.get('/login', (req, res) => {
+  // If the customer is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // Otherwise, render the 'login' template
+  res.render('login');
 });
 
-router.get('/products', (req, res) => {
-  res.render('productsPage', { title: 'Products' });
+router.get('/logout', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+router.get('/', (req, res) => {
+  res.render('productsPage', { title: 'Products', loggedIn: req.session.loggedIn }
+  );
 });
 
 router.get('/shoppingCart', async (req, res) => {
@@ -29,12 +53,12 @@ router.get('/shoppingCart', async (req, res) => {
     const customerData = await Customer.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
       Products,
-      Customers
+      customerVar,
     });
     
   } catch (err) {
