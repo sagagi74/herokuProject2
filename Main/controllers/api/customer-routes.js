@@ -4,6 +4,7 @@ const { Customer } = require('../../models');
 // CREATE new customer
 router.post('/', async (req, res) => {
   try {
+    console.log(req.body);
     const dbCustomerData = await Customer.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
