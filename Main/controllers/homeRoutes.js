@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product } = require('../models');
-const { Customer } = require('../models');
+const { Customers } = require('../models');
 const { truncate } = require('../models/Items');
 //adding Auth and
 const withAuth = require('../utils/auth');
@@ -9,12 +9,42 @@ const sequelize = require('../config/connection');
 
 //req.session.loggedIn = true;
 
+//* FELIX'S CODE HERE:
+// Login route
+router.get('/login', (req, res) => {
+  // If the customer is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/products');
+    return;
+  }
+  // Otherwise, render the 'login' template
+  res.render('login');
+});
+
+// Logout route
+router.get('/logout', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/products');
+    return;
+  }
+  res.render('login');
+});
+
+// router.get('/', (req, res) => {
+//   res.redirect('productsPage', { title: 'Products', loggedIn: req.session.loggedIn }
+//   );
+// });
 
 router.get('/', (req, res) => {
-  res.render('login', {
-    title: 'Login'
-  });
+  res.redirect('/products');
 });
+//* FELIX'S CODE ENDS HERE!
+
+// router.get('/', (req, res) => {
+//   res.render('login', {
+//     title: 'Login'
+//   });
+// });
 
 router.get('/products', async (req, res) => {
   try {
@@ -22,15 +52,16 @@ router.get('/products', async (req, res) => {
       order: [['product_name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customer.findAll({
+    const customerData = await Customers.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
 
   res.render('productsPage', { 
     title: 'Products',
     Products,
-    Customers 
+    customerVar,
+    loggedIn: req.session.loggedIn 
   });
 
 } catch (err) {
@@ -44,15 +75,15 @@ router.get('/shoppingCart', async (req, res) => {
       order: [['product_name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customer.findAll({
+    const customerData = await Customers.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
       Products,
-      Customers
+      customerVar
     });
     
   } catch (err) {

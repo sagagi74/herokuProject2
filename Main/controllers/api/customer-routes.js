@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Customer } = require('../../models');
+const { Customers } = require('../../models');
 
 // CREATE new customer
 router.post('/', async (req, res) => {
   try {
     console.log(req.body);
-    const dbCustomerData = await Customer.create({
+    const dbCustomerData = await Customers.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email_address: req.body.email_address,
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   // console.log(req, res);
   try {
-    const dbCustomerData = await Customer.findOne({ where: { email_address: req.body.email_address } });
+    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email_address } });
     console.log(dbCustomerData);
 
     if (!dbCustomerData) {
