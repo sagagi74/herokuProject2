@@ -28,9 +28,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   // console.log(req, res);
   try {
-    const dbCustomerData = await Customer.findOne({ where: { email_address: req.body.email_address } });
-    console.log(dbCustomerData);
-
+    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email} });
     if (!dbCustomerData) {
       res
         .status(400)
@@ -38,8 +36,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await dbCustomerData.checkPassword(req.body.passwords);
-
+    const validPassword = await dbCustomerData.checkPassword(req.body.password);
     if (!validPassword) {
       res
         .status(400)
