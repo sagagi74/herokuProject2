@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email_address: req.body.email_address,
-      passwords: req.body.passwords,
+      password: req.body.password,
     });
 
     // Set up sessions with a 'loggedIn' variable set to `true`
@@ -26,20 +26,21 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  // console.log(req, res);
+  console.log(req.body);
   try {
-    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email_address } });
-    console.log(dbCustomerData);
-
+    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email } });
+    // console.log(dbCustomerData);
+    // console.log(req.body.password);
     if (!dbCustomerData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
+    console.log(dbCustomerData);
 
-    const validPassword = await dbCustomerData.checkPassword(req.body.passwords);
-
+    const validPassword = await dbCustomerData.checkPassword(req.body.password);
+    console.log(validPassword);
     if (!validPassword) {
       res
         .status(400)

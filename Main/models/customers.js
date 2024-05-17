@@ -27,7 +27,7 @@ Customers.init(
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      passwords: {
+      password: {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
@@ -43,7 +43,8 @@ Customers.init(
     { 
       hooks: {
         beforeCreate: async (newUserData) => {
-          newUserData.password = await bcrypt.hash(newUserData.passwords, 10);
+          newUserData.password = await bcrypt.hash(newUserData.password, 10);
+          console.log(newUserData.password)
           return newUserData;
         },
       },
