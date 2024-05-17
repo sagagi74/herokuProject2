@@ -39,7 +39,7 @@ const signupFormHandler = async (event) => {
         first_name: firstName, 
         last_name: lastName, 
         email_address: email, 
-        passwords: password }),
+        password: password }),
       headers: { 'Content-Type': 'application/json' },
     });
 

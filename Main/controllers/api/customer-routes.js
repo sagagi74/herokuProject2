@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email_address: req.body.email_address,
-      passwords: req.body.passwords,
+      password: req.body.password,
     });
 
     // Set up sessions with a 'loggedIn' variable set to `true`
