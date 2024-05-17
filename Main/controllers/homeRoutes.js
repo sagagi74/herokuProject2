@@ -1,13 +1,11 @@
 const router = require('express').Router();
 const { Product } = require('../models');
 const { Customers } = require('../models');
-const { truncate } = require('../models/Items');
+
 //adding Auth and
 const withAuth = require('../utils/auth');
-//const { sequelize } = require('../models');
-const sequelize = require('../config/connection');
 
-//req.session.loggedIn = true;
+const sequelize = require('../config/connection');
 
 //* FELIX'S CODE HERE:
 // Login route
@@ -30,21 +28,10 @@ router.get('/logout', (req, res) => {
   res.render('login');
 });
 
-// router.get('/', (req, res) => {
-//   res.redirect('productsPage', { title: 'Products', loggedIn: req.session.loggedIn }
-//   );
-// });
-
 router.get('/', (req, res) => {
   res.redirect('/products');
 });
 //* FELIX'S CODE ENDS HERE!
-
-// router.get('/', (req, res) => {
-//   res.render('login', {
-//     title: 'Login'
-//   });
-// });
 
 router.get('/products', async (req, res) => {
   try {
@@ -69,19 +56,19 @@ router.get('/products', async (req, res) => {
 }
 });
 
-router.get('/product/:id',  async (req, res) => {
+router.get('/products/:id',  async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id);
     const Products = productData.get({ plain: true });
 
-    const customerData = await Customer.findAll({
+    const customerData = await Customers.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
     console.log(Products);
     res.render('productDetailsPage', {
       Products,
-      Customers
+      customerVar
     });
     
   } catch (err) {
@@ -252,25 +239,5 @@ router.get('/orderDetail', async (req, res) => {
     console.log(err);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

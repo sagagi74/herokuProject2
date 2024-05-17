@@ -29,18 +29,15 @@ router.post('/login', async (req, res) => {
   console.log(req.body);
   try {
     const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email } });
-    // console.log(dbCustomerData);
-    // console.log(req.body.password);
     if (!dbCustomerData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
-    console.log(dbCustomerData);
 
     const validPassword = await dbCustomerData.checkPassword(req.body.password);
-    console.log(validPassword);
+
     if (!validPassword) {
       res
         .status(400)
@@ -51,7 +48,7 @@ router.post('/login', async (req, res) => {
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       req.session.loggedIn = true;
-
+      req.session.customer_id = dbCustomerData.customer_id;
       res
         .status(200)
         .json({ customer: dbCustomerData, message: 'You are now logged in!' });
