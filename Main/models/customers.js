@@ -33,7 +33,6 @@ Customers.init(
       },
       session_id: {
         type: DataTypes.STRING(255),
-        allowNull: false,
       },
       created_date: {
         type: DataTypes.DATE,
@@ -43,8 +42,8 @@ Customers.init(
     },
     { 
       hooks: {
-        async beforeCreate(newUserData) {
-          newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        beforeCreate: async (newUserData) => {
+          newUserData.password = await bcrypt.hash(newUserData.passwords, 10);
           return newUserData;
         },
       },
