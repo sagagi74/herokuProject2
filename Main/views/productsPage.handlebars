@@ -2,7 +2,7 @@
     <div class="row" style="">
     {{#each Products as |Product| }}
         <div class="col-3 border border-secondary" style="">
-            <img src="/assets/jordan.jpeg" class="d-block mt-4 mx-auto" style="height: 150px;" alt="" />
+            <img src="{{Product.product_url}}" class="d-block mt-4 mx-auto" style="width: 90%;" alt="" />
             <p class="ml-3 mb-0 fs-5 text-secondary">{{Product.product_name}}</p>
             <p class="ml-3 fs-6 fw-bold">{{Product.price}}</p>
         </div>

@@ -2,31 +2,37 @@
     {
         "product_name": "Carrots",
         "product_description" : "Baby carrots in a bag", 
-        "product_url" : "placeholder", 
+        "product_url" : "https://live.staticflickr.com/65535/52666692421_0b0a80509f_b.jpg", 
         "price": "12.99"
     },
     {
         "product_name" : "Goats" ,
         "product_description" : "A herd of 5 goats",
-        "product_url" : "placeholder", 
+        "product_url" : "https://live.staticflickr.com/27/58824804_88698983f5_b.jpg", 
         "price" : "2000.00"
     },
     {
         "product_name" : "Jacket",
         "product_description" : "A nice comfortable long sleeve jacket with a hood attachement", 
-        "product_url" : "placeholder", 
+        "product_url" : "https://upload.wikimedia.org/wikipedia/commons/f/fd/Men%27s_black_PVC_down_jacket_01.jpg", 
         "price" : "79.99"
     },
     {
         "product_name" : "Hat" ,
         "product_description" : "Something to keep your head warm while repping whatever you want", 
-        "product_url" : "placeholder", 
+        "product_url" : "https://media.snl.no/media/188153/standard_compressed_Stetson_Sutter_hat__early_21st_century_1_.jpg", 
         "price" : "8.99"
     },
     {
         "product_name": "Shoes" ,
         "product_description" : "Something to protect your feet while repping whatever you want", 
-        "product_url" : "placeholder", 
+        "product_url" : "https://live.staticflickr.com/3573/3520655108_199173f977_b.jpg", 
+        "price" : "89.99"
+    },
+    {
+        "product_name": "Shirt" ,
+        "product_description" : "Something to protect your feet while repping whatever you want", 
+        "product_url" : "https://cdn12.picryl.com/photo/2016/12/31/t-shirt-white-garment-bd3ce7-1024.jpg", 
         "price" : "89.99"
     }
 ]
