@@ -54,11 +54,21 @@
           </ul>
         </div>
         <div>
-          <a class="mx-2 fs-5 nav-link" href="#">
-            <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <!-- If the customer is logged in, show a logout button -->
+            {{#if loggedIn}}
+            <button class="mx-2 fs-5 nav-link" id="logout" class="btn-no-style">
+              <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-            </svg>
-            Login
+              </svg>
+              Logout</button>
+            {{else}}
+            <!-- Otherwise, show a link to login -->
+            <a class="mx-2 fs-5 nav-link" href="/login">
+              <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+              </svg>
+              Login</a>
+            {{/if}}
           </a>
         </div>
       </div>
@@ -84,6 +94,10 @@
       </svg>
     </div>
   </footer>
+  <!-- If the customer is logged in, load the JS script for when they logout -->
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
 
 </html>

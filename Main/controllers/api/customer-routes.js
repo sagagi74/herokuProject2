@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const { Customer } = require('../../models');
+const { Customers } = require('../../models');
 
 // CREATE new customer
 router.post('/', async (req, res) => {
   try {
     console.log(req.body);
-    const dbCustomerData = await Customer.create({
+    const dbCustomerData = await Customers.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email_address: req.body.email_address,
-      passwords: req.body.passwords,
+      password: req.body.password,
     });
 
     // Set up sessions with a 'loggedIn' variable set to `true`
@@ -26,17 +26,21 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  // console.log(req, res);
+  console.log(req.body);
   try {
-    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email} });
+    const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email } });
+    // console.log(dbCustomerData);
+    // console.log(req.body.password);
     if (!dbCustomerData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
+    console.log(dbCustomerData);
 
     const validPassword = await dbCustomerData.checkPassword(req.body.password);
+    console.log(validPassword);
     if (!validPassword) {
       res
         .status(400)

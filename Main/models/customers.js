@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
 
 class Customers extends Model {
   checkPassword(loginPw) {
@@ -26,13 +27,12 @@ Customers.init(
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      passwords: {
+      password: {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
       session_id: {
         type: DataTypes.STRING(255),
-        allowNull: false,
       },
       created_date: {
         type: DataTypes.DATE,
@@ -43,7 +43,8 @@ Customers.init(
     { 
       hooks: {
         beforeCreate: async (newUserData) => {
-          newUserData.passwords = await bcrypt.hash(newUserData.passwords, 10);
+          newUserData.password = await bcrypt.hash(newUserData.password, 10);
+          console.log(newUserData.password)
           return newUserData;
         },
       },
