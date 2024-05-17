@@ -1,10 +1,12 @@
-function productRedirect(){
+// function transaction(event){
+//     document.location.replace('/transaction');
+// }
+
+// document.addEventListener('#transaction', functionhere);
+document
+.querySelector('#backToProduct')
+.addEventListener("click", function(event) {
+    event.preventDefault();
+    console.log('derp');
     document.location.replace('/products');
-}
-
-function transaction(){
-    document.location.replace('/transaction');
-}
-
-document.addEventListener('transaction', functionhere);
-document.addEventListener('backToProduct', productRedirect());
+});

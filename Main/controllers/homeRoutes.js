@@ -94,10 +94,7 @@ router.get('/shoppingCart', async (req, res) => {
         p.price, c.customer_id,p.product_url, p.product_name, tm.total
       
     `;
-
     const [results] = await sequelize.query(sqlQuery);
-
-    console.log(results);
 
     const serializedData = results.map((data) => ({
       product_name: data.product_name,
@@ -109,7 +106,6 @@ router.get('/shoppingCart', async (req, res) => {
       tax: 9,
       finalPrice: data.total * 1.09      
     }));
-
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
