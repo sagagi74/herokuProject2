@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Product } = require('../models');
-const { Customer } = require('../models');
+const { Customers } = require('../models');
 const { truncate } = require('../models/Items');
 //adding Auth and
 const withAuth = require('../utils/auth');
@@ -22,15 +22,16 @@ router.get('/products', async (req, res) => {
       order: [['product_name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customer.findAll({
+    const customerData = await Customers.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
 
   res.render('productsPage', { 
     title: 'Products',
     Products,
-    Customers 
+    customerVar,
+    loggedIn: req.session.loggedIn 
   });
 
 } catch (err) {
@@ -44,15 +45,15 @@ router.get('/shoppingCart', async (req, res) => {
       order: [['product_name', 'ASC']],
     });
     const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customer.findAll({
+    const customerData = await Customers.findAll({
       order: [['customer_id', 'ASC']],
     });
-    const Customers = customerData.map((project) => project.get({ plain: true }));
+    const customerVar = customerData.map((project) => project.get({ plain: true }));
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
       Products,
-      Customers
+      customerVar
     });
     
   } catch (err) {
