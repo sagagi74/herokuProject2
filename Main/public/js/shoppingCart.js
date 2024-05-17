@@ -7,6 +7,5 @@ document
 .querySelector('#backToProduct')
 .addEventListener("click", function(event) {
     event.preventDefault();
-    console.log('derp');
     document.location.replace('/products');
 });
