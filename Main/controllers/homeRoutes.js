@@ -79,7 +79,7 @@ router.get('/product/:id',  async (req, res) => {
     });
     const Customers = customerData.map((project) => project.get({ plain: true }));
     console.log(Products);
-    res.render('product-details', {
+    res.render('productDetailsPage', {
       Products,
       Customers
     });
