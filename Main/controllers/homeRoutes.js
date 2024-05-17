@@ -69,6 +69,26 @@ router.get('/products', async (req, res) => {
 }
 });
 
+router.get('/product/:id',  async (req, res) => {
+  try {
+    const productData = await Product.findByPk(req.params.id);
+    const Products = productData.get({ plain: true });
+
+    const customerData = await Customer.findAll({
+      order: [['customer_id', 'ASC']],
+    });
+    const Customers = customerData.map((project) => project.get({ plain: true }));
+    console.log(Products);
+    res.render('product-details', {
+      Products,
+      Customers
+    });
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/shoppingCart', async (req, res) => {
   try {
     const productData = await Product.findAll({
