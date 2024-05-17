@@ -9,7 +9,6 @@ const sequelize = require('../config/connection');
 
 //req.session.loggedIn = true;
 
-
 router.get('/', (req, res) => {
   res.render('login', {
     title: 'Login'
