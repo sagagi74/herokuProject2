@@ -9,11 +9,42 @@ const sequelize = require('../config/connection');
 
 //req.session.loggedIn = true;
 
-router.get('/', (req, res) => {
-  res.render('login', {
-    title: 'Login'
-  });
+//* FELIX'S CODE HERE:
+// Login route
+router.get('/login', (req, res) => {
+  // If the customer is already logged in, redirect to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/products');
+    return;
+  }
+  // Otherwise, render the 'login' template
+  res.render('login');
 });
+
+// Logout route
+router.get('/logout', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/products');
+    return;
+  }
+  res.render('login');
+});
+
+// router.get('/', (req, res) => {
+//   res.redirect('productsPage', { title: 'Products', loggedIn: req.session.loggedIn }
+//   );
+// });
+
+router.get('/', (req, res) => {
+  res.redirect('/products');
+});
+//* FELIX'S CODE ENDS HERE!
+
+// router.get('/', (req, res) => {
+//   res.render('login', {
+//     title: 'Login'
+//   });
+// });
 
 router.get('/products', async (req, res) => {
   try {
