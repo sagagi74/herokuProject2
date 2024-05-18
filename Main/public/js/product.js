@@ -1,5 +1,3 @@
-const dayjs = require('dayjs');
-
 const buyProductQuantity = async (event) => {
     event.preventDefault();
 
@@ -10,7 +8,7 @@ const buyProductQuantity = async (event) => {
 
     const total = 0; // has to be declared because part of table
     const customer_id = 5;  // Assuming you have the customer ID available here
-    const created_date = dayjs();
+    const created_date = dayjs().format('YYYY-MM-DD HH:mm:ss');
     const ordered = 0; // has to be declared because part of table
     const transaction_id = 0; // has to be declared because part of table
     const dordered = 0; // has to be declared because part of table
