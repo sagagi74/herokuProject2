@@ -1,9 +1,15 @@
+*{
+    font-family: 'Poppins', 'san-serif';
+}
+
 #navbar {
     background-color: #fdb927;
 }
+
 #navbar a {
     color: #552583;
 }
+
 #navbar a:hover {
     color: #8a3fd0;
 }
@@ -11,9 +17,11 @@
 #footer {
     background-color: #552583;
 }
+
 #footer svg {
     color: white;
 }
+
 #footer svg:hover {
     cursor: pointer;
     color: #fdb927;
