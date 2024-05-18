@@ -1,31 +1,92 @@
-  <div class="col">
-        {{#each data as |data| }}
-            <div class="row col-sm-6">
-                <div class="col-sm-4 ml-1">
-                <h3>{{data.transaction_id}}</h3>
-              </div>
-              <div class="col-sm-4 ml-1">
-                <h3>{{data.product_id}}</h3>
-              </div>
-              <div class="col-sm-4 ml-1">
-                <h3>{{data.product_name}}</h3>
-              </div>
-              <div class="col-sm-2 ml-1 ">
-                <h3>{{data.product_description}}</h3>
-              </div>
-              <div class="col-sm-2 ml-1 ">
-                <h3>{{data.total}}</h3>
-              </div>
-              <div class="col-sm-2 ml-1 ">
-                <h3>{{data.product_url}}</h3>
-              </div>
-              <div class="col-sm-2 ml-1 ">
-                <h3>{{data.Qty}}</h3>
-              </div>
+   <style>
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    font-size: larger;
+}
+
+h2 {
+    color: #343a40;
+}
 
 
+.order-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-body {
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    
+}
+
+
+/*add border radius to the images and shadow*/
+.order-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/*
+this is adding color the text
+*/
+.list-group-item strong {
+    color: #007bff;
+}
+
+.list-group-item:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+.row 
+{
+    margin-bottom: 20px;
+}
+
+  </style>
+ 
+ <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center mb-4">Order History</h2>
+        <div class="card order-card mb-4">
+          {{#each data as |order| }}
+          <div class="card-header">
+            {{order.transaction_id}}
+          </div>
+
+
+          <div class="card-body">
+   
+
+                
+
+
+                     <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{order.product_url}}" class="img-fluid order-image" alt="Order Image">
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Item: </strong> {{order.product_name}}</li>
+                               <li class="list-group-item"><strong>Discription:</strong> ${{order.product_description}}</li>
+                            <li class="list-group-item"><strong>Total:</strong> ${{order.total}}</li>
+                         
+                        </ul>
+                    </div>
+                </div>
+
+
+            {{/each}}
+           
+          
             </div>
-        {{/each}}
+
       
       </div>
 

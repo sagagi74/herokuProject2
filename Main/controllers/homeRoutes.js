@@ -147,6 +147,7 @@ router.get('/ordermain', async (req, res) => {
       transactionsdetails td ON tm.transaction_id = td.transaction_id
   JOIN 
       products p ON td.product_id = p.product_id
+  where c.customer_id = ${req.session.customer_id}
   GROUP BY 
       tm.transaction_id,tm.created_date, c.customer_id;
     `;
@@ -173,7 +174,7 @@ router.get('/ordermain', async (req, res) => {
   }
 });
 
-router.get('/orderDetail', async (req, res) => {
+router.get('/orderDetail/:id', async (req, res) => {
   try {
     
     const sqlQuery = `
@@ -194,13 +195,14 @@ router.get('/orderDetail', async (req, res) => {
     transactionsdetails td ON tm.Transaction_id = td.Transaction_id
   JOIN 
     products p ON td.Product_id = p.Product_id
+    where tm.transaction_id = ${req.params.id}
   GROUP BY 
      p.product_id,tm.transaction_id,p.price, p.product_name, p.product_description, p.product_url;
     `;
 
     const [results] = await sequelize.query(sqlQuery);
 
-    console.log(results);
+    console.log(req.params.id);
 
     const serializedData = results.map((data) => ({
       transaction_id: data.transaction_id,
