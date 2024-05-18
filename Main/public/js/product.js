@@ -8,9 +8,9 @@ const buyProductQuantity = async (event) => {
     // const product_url = productImageElement.getAttribute('src');
     // const price = document.querySelector('#product-price').textContent.trim().replace('Cost: $', '');
     const Transaction_id = 0;
-    const Product_id = 0;
     const ordered = 0;
 
+    // getting the product_id
     const pageURL = new URL(window.location.href);
     const urlArr = pageURL.pathname.split('/');
     const product_id = urlArr[urlArr.length - 1];
@@ -20,7 +20,7 @@ const buyProductQuantity = async (event) => {
             try {
                 await fetch('/api/product/:id', {
                     method: 'POST',
-                    body: JSON.stringify({Transaction_id, Product_id, ordered}),
+                    body: JSON.stringify({Transaction_id, product_id, ordered}),
                     headers: { 'Content-Type': 'application/json' },
                 });
               } catch (err) {
