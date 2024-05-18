@@ -3,7 +3,6 @@ const { Product , Customers} = require('../models');
 
 //adding Auth 
 const withAuth = require('../utils/auth');
-
 const sequelize = require('../config/connection');
 
 //* FELIX'S CODE HERE:
@@ -77,7 +76,7 @@ router.get('/products/:id',  async (req, res) => {
 });
 
 //shopping cart page
-router.get('/shoppingCart', async (req, res) => {
+router.get('/shoppingCart', withAuth, async (req, res) => {
   try {
     //raw sql data to pull values needed to display on shopping cart page
     const sqlQuery = `
@@ -93,7 +92,7 @@ router.get('/shoppingCart', async (req, res) => {
           JOIN transactionsdetails td2 ON p2.Product_id = td2.Product_id
           JOIN transactionsmains tm2 ON td2.Transaction_id = tm2.Transaction_id
           JOIN customers c2 ON tm2.customer_id = c2.customer_id
-          WHERE c2.customer_id = 1
+          WHERE c2.customer_id = ${req.session.customer_id}
         ) AS totalPrice
       FROM 
         customers c
@@ -104,7 +103,7 @@ router.get('/shoppingCart', async (req, res) => {
       JOIN 
         products p ON td.Product_id = p.Product_id
       WHERE
-       c.customer_id = 1
+       c.customer_id = ${req.session.customer_id}
       GROUP BY 
         p.price, c.customer_id,p.product_url, p.product_name, tm.total
       
@@ -136,7 +135,7 @@ router.get('/shoppingCart', async (req, res) => {
 });
 
 
-router.get('/ordermain', async (req, res) => {
+router.get('/ordermain', withAuth, async (req, res) => {
   try {
     
     const sqlQuery = `
@@ -185,7 +184,7 @@ router.get('/ordermain', async (req, res) => {
   }
 });
 
-router.get('/orderDetail/:id', async (req, res) => {
+router.get('/orderDetail/:id', withAuth, async (req, res) => {
   try {
     
     const sqlQuery = `
@@ -208,7 +207,7 @@ router.get('/orderDetail/:id', async (req, res) => {
     products p ON td.Product_id = p.Product_id
     where tm.transaction_id = ${req.params.id}
   GROUP BY 
-     p.product_id,tm.transaction_id,p.price, p.product_name, p.product_description, p.product_url;
+     p.product_id,tm.transaction_id, p.product_name, p.product_description, p.product_url;
     `;
 
     const [results] = await sequelize.query(sqlQuery);
@@ -234,7 +233,7 @@ router.get('/orderDetail/:id', async (req, res) => {
   }
 });
 
-router.get('/transactionComplete', (req,res) => {
+router.get('/transactionComplete', withAuth, (req,res) => {
   
 
   res.render('transactionComplete',{

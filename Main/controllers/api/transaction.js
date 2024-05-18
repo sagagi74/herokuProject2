@@ -1,8 +1,10 @@
 const router = require('express').Router();
 
 router.put('/', async (req, res) => {
+    console.log(req.session.customer_id);
     // raw sql query for updating database
     try{ 
+        console.log("WOREULKASHJDAH@W ASDAW")
         const sqlQuery = `
             START TRANSACTION;
             UPDATE TransactionsMains

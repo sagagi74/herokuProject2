@@ -1,37 +1,46 @@
+const dayjs = require('dayjs');
+
 const buyProductQuantity = async (event) => {
     event.preventDefault();
-
-    const productQuantity = document.querySelector('#product-quantity').value;
-    // const product_name = document.querySelector('#product-name').textContent;
-    // const product_description = document.querySelector('#product-description').textContent;
-    // const productImageElement = document.querySelector('#product-image');
-    // const product_url = productImageElement.getAttribute('src');
-    // const price = document.querySelector('#product-price').textContent.trim().replace('Cost: $', '');
-    const Transaction_id = 0;
-    const ordered = 0;
 
     // getting the product_id
     const pageURL = new URL(window.location.href);
     const urlArr = pageURL.pathname.split('/');
     const product_id = urlArr[urlArr.length - 1];
 
-    if (productQuantity >= 1) {
-        for (let i=0; i < productQuantity; i++) {
-            try {
-                await fetch('/api/product/:id', {
-                    method: 'POST',
-                    body: JSON.stringify({Transaction_id, product_id, ordered}),
-                    headers: { 'Content-Type': 'application/json' },
-                });
-              } catch (err) {
-                console.log('Error on loop');
-              }
-        };
-    } else {
-        alert("Please enter a valid quantity.");
+    const total = 0; // has to be declared because part of table
+    const customer_id = 5;  // Assuming you have the customer ID available here
+    const created_date = dayjs();
+    const ordered = 0; // has to be declared because part of table
+    const transaction_id = 0; // has to be declared because part of table
+    const dordered = 0; // has to be declared because part of table
+    const transactionData = {
+        total,
+        customer_id,
+        created_date,
+        ordered,
+        transaction_id,
+        product_id,
+        dordered,
+    };
+    try {
+        const response = await fetch(`/api/products/${product_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(transactionData)
+        });
+        const result = await response.json();
+        if (result.success) {
+            console.log('Data inserted successfully:', result);
+        } else {
+            console.error('Error inserting data:', result.error);
+        }
+    } catch (err) {
+        console.error('Error inserting ');
     }
-}
-
+};
 document
     .querySelector('.product-bought')
     .addEventListener('submit', buyProductQuantity);
