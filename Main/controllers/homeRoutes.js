@@ -48,7 +48,7 @@ router.get('/products', async (req, res) => {
     title: 'Products',
     Products,
     customerVar,
-    loggedIn: req.session.loggedIn 
+    loggedIn: req.session.loggedIn
   });
 
 } catch (err) {
@@ -68,7 +68,8 @@ router.get('/products/:id',  async (req, res) => {
     console.log(Products);
     res.render('productDetailsPage', {
       Products,
-      customerVar
+      customerVar,
+      loggedIn: req.session.loggedIn
     });
     
   } catch (err) {
