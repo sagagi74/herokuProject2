@@ -223,4 +223,9 @@ router.get('/orderDetail/:id', async (req, res) => {
   }
 });
 
+router.get('/transactionComplete', (req,res) => {
+  
+
+  res.render('transactionComplete',{});
+});
 module.exports = router;
