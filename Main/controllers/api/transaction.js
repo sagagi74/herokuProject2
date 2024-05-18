@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const { Customers } = require('../../models');
-const { TransactionsDetail } = require('../../models');
 
 router.put('/', async (req, res) => {
+    // raw sql query for updating database
     try{ 
         const sqlQuery = `
             START TRANSACTION;
@@ -17,7 +16,6 @@ router.put('/', async (req, res) => {
             COMMIT;
         `;
         await sequelize.query(sqlQuery);
-
     }
     catch (err) {
         res.status(500).json(err);

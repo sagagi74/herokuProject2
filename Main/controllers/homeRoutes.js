@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const { Product } = require('../models');
-const { Customers } = require('../models');
+const { Product , Customers} = require('../models');
 
-//adding Auth and
+//adding Auth 
 const withAuth = require('../utils/auth');
 
 const sequelize = require('../config/connection');
@@ -65,7 +64,7 @@ router.get('/products/:id',  async (req, res) => {
       order: [['customer_id', 'ASC']],
     });
     const customerVar = customerData.map((project) => project.get({ plain: true }));
-    console.log(Products);
+
     res.render('productDetailsPage', {
       Products,
       customerVar,
@@ -77,8 +76,10 @@ router.get('/products/:id',  async (req, res) => {
   }
 });
 
+//shopping cart page
 router.get('/shoppingCart', async (req, res) => {
   try {
+    //raw sql data to pull values needed to display on shopping cart page
     const sqlQuery = `
       SELECT 
         c.customer_id, 
@@ -108,8 +109,10 @@ router.get('/shoppingCart', async (req, res) => {
         p.price, c.customer_id,p.product_url, p.product_name, tm.total
       
     `;
+    //running raw sql query
     const [results] = await sequelize.query(sqlQuery);
-    console.log(results);
+    
+    //passing it as an object 
     const serializedData = results.map((data) => ({
       product_name: data.product_name,
       product_url: data.product_url,
@@ -120,7 +123,7 @@ router.get('/shoppingCart', async (req, res) => {
       tax: 9,
       finalPrice: (data.totalPrice * 1.09).toFixed(2)     
     }));
-
+    //passing it through to the shopping cart page
     res.render('shoppingCart', {
       title: 'Shopping Cart',
       data:serializedData,
@@ -162,8 +165,6 @@ router.get('/ordermain', async (req, res) => {
 
     const [results] = await sequelize.query(sqlQuery);
 
-    console.log(results);
-
     const serializedData = results.map((data) => ({
       transaction_id: data.transaction_id,
       created_date: data.created_date,
@@ -181,7 +182,6 @@ router.get('/ordermain', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
   }
 });
 
@@ -213,8 +213,6 @@ router.get('/orderDetail/:id', async (req, res) => {
 
     const [results] = await sequelize.query(sqlQuery);
 
-    console.log(req.params.id);
-
     const serializedData = results.map((data) => ({
       transaction_id: data.transaction_id,
       product_id: data.product_id,
@@ -233,7 +231,6 @@ router.get('/orderDetail/:id', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
   }
 });
 
