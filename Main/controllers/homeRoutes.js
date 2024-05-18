@@ -86,8 +86,14 @@ router.get('/shoppingCart', async (req, res) => {
         p.product_name,
         p.price,
         tm.total,
-
-        COUNT(p.product_name) AS QTY
+        COUNT(p.product_name) AS QTY,
+        (SELECT SUM(p2.price) 
+          FROM products p2
+          JOIN transactionsdetails td2 ON p2.Product_id = td2.Product_id
+          JOIN transactionsmains tm2 ON td2.Transaction_id = tm2.Transaction_id
+          JOIN customers c2 ON tm2.customer_id = c2.customer_id
+          WHERE c2.customer_id = 1
+        ) AS totalPrice
       FROM 
         customers c
       JOIN 
@@ -103,21 +109,22 @@ router.get('/shoppingCart', async (req, res) => {
       
     `;
     const [results] = await sequelize.query(sqlQuery);
-
+    console.log(results);
     const serializedData = results.map((data) => ({
       product_name: data.product_name,
       product_url: data.product_url,
       price: data.price,
       quantity: data.QTY,
-      totalPrice: data.price * data.QTY,
-      subtotalPrice: data.total,
+      totalCost: data.price * data.QTY,
+      subtotalPrice: data.totalPrice,
       tax: 9,
-      finalPrice: data.total * 1.09      
+      finalPrice: (data.totalPrice * 1.09).toFixed(2)     
     }));
 
     res.render('shoppingCart', {
       title: 'Shopping Cart',
-      data:serializedData
+      data:serializedData,
+      loggedIn: req.session.loggedIn
     });
     
   } catch (err) {
@@ -168,7 +175,10 @@ router.get('/ordermain', async (req, res) => {
       
     }));
 
-    res.render('orderMain', { data: serializedData });
+    res.render('orderMain', { 
+      data: serializedData,
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
@@ -217,7 +227,10 @@ router.get('/orderDetail/:id', async (req, res) => {
       
     }));
 
-    res.render('orderdetail', { data: serializedData });
+    res.render('orderdetail', { 
+      data: serializedData,
+      loggedIn: req.session.loggedIn 
+    });
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
@@ -227,6 +240,8 @@ router.get('/orderDetail/:id', async (req, res) => {
 router.get('/transactionComplete', (req,res) => {
   
 
-  res.render('transactionComplete',{});
+  res.render('transactionComplete',{
+    loggedIn: req.session.loggedIn
+  });
 });
 module.exports = router;

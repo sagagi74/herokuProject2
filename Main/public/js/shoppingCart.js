@@ -8,8 +8,14 @@ document
 
 document
     .querySelector('#transaction')
-    .addEventListener("click", function(event) {
-        event.preventDefault();
-        // needs to update databases
+    .addEventListener("click", async () => {
+        try {
+            await fetch('/api/transaction/', {
+                method: 'POST',
+            });
+          } catch (err) {
+            console.log('Error on POST');
+          }
+        document.location.replace('/transactionComplete');
         
     });
