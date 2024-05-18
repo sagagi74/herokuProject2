@@ -1,35 +1,55 @@
 <main class="container">
     <div class="row">
-      <div class="col">
-        {{#each Products as |Product| }}
-            <div class="row col-sm-6">
-              <div class="col-sm-4 ml-1">
-                <h3>{{Product.product_name}}</h3>
+        <div class="'col-10">
+            <div class="row">
+              <div class="col-3">
+                <h3>Product and product name</h3>
               </div>
-              <div class="col-sm-2 ml-1 ">
-                <h3>{{Product.price}}</h3>
+              <div class="col-2">
+                <h3>&nbsp;&nbsp;&nbsp; price</h3>
               </div>
-            </div>
-        {{/each}}
-        {{#each Customers as |Customer| }}
-            <div class="row col-sm-6">
-              <div class="col-sm-4 ml-1">
-                <h3>{{Customer.first_name}}, {{Customer.last_name}}</h3>
+              <div class="col-2">
+                <h3>quantity</h3>
+              </div>
+              <div class="col-2">
+                <h3>totalPrice</h3>
               </div>
             </div>
-        {{/each}}
-      </div>
-      <div class="col">
+        </div>  
+    </div>
+    <div class="row">
+            <div class="col-10">
+            {{#each data as |customer|}}
+            <div class="row">
+              <div class="col-2">
+                <img src="{{customer.product_url}}" style="width: 100%;" alt="" />
+              </div>
+              <div class="col-2">
+                <h3>{{customer.product_name}}</h3>
+              </div>
+              <div class="col-2">
+                <h3>{{customer.price}}</h3>
+              </div>
+              <div class="col-2">
+                <h3>{{customer.quantity}}</h3>
+              </div>
+              <div class="col-2">
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;{{customer.totalPrice}}</h3>
+              </div>
+            </div>
+            {{/each}}
+            </div>    
         
-        <p class="font-weight-bold">Order Summary</p><br>
-        <p>Order Subtotal:</p><br>
-        <p>Tax:</p><br>
-        <p>Total:</p>
-        <button type="button" class="btn btn-light btn-lg btn-block">Continue Shopping</button> <br>
-        <button type="button" class="btn btn-dark btn-lg btn-block">Buy! Buy! Buy!</button>
-      </div>
+            <div class="col-2 orderSummary">
+              <p class="font-weight-bold">Order Summary</p><br>
+              <p>Order Subtotal: {{data.[0].subtotalPrice}}</p><br>
+              <p>Tax: {{data.[0].tax}}%</p><br>
+              <p>Total: {{data.[0].finalPrice}}</p>
+              <button type="button" id="backToProduct" class="btn btn-light btn-lg btn-block ">Continue Shopping</button> <br>
+              <button type="button" id="transaction" class="btn btn-dark btn-lg btn-block ">Buy! Buy! Buy!</button>
+            </div>
     </div>
 </main>
 
-
+<script src="/js/shoppingCart.js"></script>
 

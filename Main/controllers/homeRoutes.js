@@ -78,38 +78,14 @@ router.get('/products/:id',  async (req, res) => {
 
 router.get('/shoppingCart', async (req, res) => {
   try {
-    const productData = await Product.findAll({
-      order: [['product_name', 'ASC']],
-    });
-    const Products = productData.map((project) => project.get({ plain: true }));
-    const customerData = await Customers.findAll({
-      order: [['customer_id', 'ASC']],
-    });
-    const customerVar = customerData.map((project) => project.get({ plain: true }));
-
-    res.render('shoppingCart', {
-      title: 'Shopping Cart',
-      Products,
-      customerVar
-    });
-    
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-
-router.get('/shop', async (req, res) => {
-  try {
-
     const sqlQuery = `
       SELECT 
-        c.first_name,
-        c.last_name,
+        c.customer_id, 
+        p.product_url,
         p.product_name,
-        p.product_description,
         p.price,
-    
+        tm.total,
+
         COUNT(p.product_name) AS QTY
       FROM 
         customers c
@@ -119,30 +95,35 @@ router.get('/shop', async (req, res) => {
         transactionsdetails td ON tm.Transaction_id = td.Transaction_id
       JOIN 
         products p ON td.Product_id = p.Product_id
+      WHERE
+       c.customer_id = 1
       GROUP BY 
-        p.price, c.first_name, c.last_name, p.product_name, p.product_description
-        where customers.id = ${customerid};
+        p.price, c.customer_id,p.product_url, p.product_name, tm.total
+      
     `;
-
     const [results] = await sequelize.query(sqlQuery);
 
-    console.log(results);
-
     const serializedData = results.map((data) => ({
-      first_name: data.first_name,
-      last_name: data.last_name,
       product_name: data.product_name,
-      product_description: data.product_description,
+      product_url: data.product_url,
       price: data.price,
       quantity: data.QTY,
+      totalPrice: data.price * data.QTY,
+      subtotalPrice: data.total,
+      tax: 9,
+      finalPrice: data.total * 1.09      
     }));
 
-    res.render('shop', { data: serializedData });
+    res.render('shoppingCart', {
+      title: 'Shopping Cart',
+      data:serializedData
+    });
+    
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
   }
 });
+
 
 router.get('/ordermain', async (req, res) => {
   try {
