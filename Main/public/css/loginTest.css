@@ -1,0 +1,20 @@
+
+.btnLogin {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid white;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: white;
+  font-weight: 500;
+  margin-left: 40px;
+  transition: .5s;
+}
+
+.btnLogin:hover {
+  background: white;
+  color: black;
+}

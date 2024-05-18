@@ -1,3 +1,4 @@
+
 *{
   margin: 0;
   padding: 0;
@@ -25,8 +26,8 @@ header {
   display: flex;
   justify-content: right; /* may adjust to space-between if we have content on the left of header */
   align-items: center;
-  z-index: 99;
-}
+  z-index: 99; 
+} 
 
 #navbarSection a {
   position: relative;

@@ -26,10 +26,10 @@ const loginFormHandler = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const firstName = document.querySelector('#first-name-signup').value.trim();
-  const lastName = document.querySelector('#last-name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const firstName = document.querySelector('.first-name-signup').value.trim();
+  const lastName = document.querySelector('.last-name-signup').value.trim();
+  const email = document.querySelector('.email-signup').value.trim();
+  const password = document.querySelector('.password-signup').value.trim();
   console.log(firstName, lastName, email, password);
 
   if (firstName && lastName && email && password) {
@@ -53,8 +53,8 @@ const signupFormHandler = async (event) => {
 
 document
   .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+  .addEventListener('click', loginFormHandler);
 
 document
   .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+  .addEventListener('click', signupFormHandler);

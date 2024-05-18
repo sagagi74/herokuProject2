@@ -1,3 +1,69 @@
+<head>
+    <!-- <link rel="stylesheet" href="/css/login.css"> -->
+    <link rel="stylesheet" href="/css/loginTest.css">
+</head>
+
+<div class="wrapper">
+    <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+    <div class="form-box login">
+      <h2>Login</h2>
+      <form>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          <input id="email-login" type="email" required>
+          <label>Email</label>
+        </div>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input id="password-login" type="password" required>
+          <label>Password</label>
+        </div>
+        <div class="remember-forgot">
+          <label><input type="checkbox"> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="button" class="btn login-form-submit login-form">Login</button>
+        <div class="login_register">
+          <p>Don't have an account?<a href="#" class="register_link"> Register</a></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-box register">
+      <h2>Registration</h2>
+      <form>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          <input id="create-username-login" class="first-name-signup" type="text" required>
+          <label>First Name</label>
+        </div>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+          <input id="create-username-login" class="last-name-signup" type="text" required>
+          <label>Last Name</label>
+        </div>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+          <input id="create-email-login" class="email-signup" type="email" required>
+          <label>Email</label>
+        </div>
+        <div class ="input-box">
+          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <input ="create-password-login" class="password-signup" type="password" required>
+          <label>Password</label>
+        </div>
+        <div class="remember-forgot">
+          <label><input type="checkbox"> I agree to the terms & conditions</label>
+        </div>
+        <button type="button" class="btn register_submit signup-form">Register</button>
+        <div class="login_register">
+          <p>Already have an account?<a href="#" class="login_link"> Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!--
 <div class="row justify-space-between-md">
   <div class="login-card">
     <h2 class="page-title">Login</h2>
@@ -40,5 +106,6 @@
     </form>
   </div>
 </div>
+-->
 
 <script src="/js/login.js"></script>
