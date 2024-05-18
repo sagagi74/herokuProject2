@@ -44,7 +44,6 @@ Customers.init(
       hooks: {
         beforeCreate: async (newUserData) => {
           newUserData.password = await bcrypt.hash(newUserData.password, 10);
-          console.log(newUserData.password)
           return newUserData;
         },
       },
