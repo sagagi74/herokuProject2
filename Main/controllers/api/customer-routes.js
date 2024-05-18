@@ -4,7 +4,6 @@ const { Customers } = require('../../models');
 // CREATE new customer
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
     const dbCustomerData = await Customers.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -19,14 +18,12 @@ router.post('/', async (req, res) => {
       res.status(200).json(dbCustomerData);
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // Login
 router.post('/login', async (req, res) => {
-  console.log(req.body);
   try {
     const dbCustomerData = await Customers.findOne({ where: { email_address: req.body.email } });
     if (!dbCustomerData) {
@@ -45,7 +42,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    // Once the user successfully logs in, set up the sessions variable 'loggedIn'
+    // Once the user successfully logs in, set up the sessions variable 'loggedIn' and allows us access to customer_id of the user
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.customer_id = dbCustomerData.customer_id;
@@ -54,7 +51,6 @@ router.post('/login', async (req, res) => {
         .json({ customer: dbCustomerData, message: 'You are now logged in!' });
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
