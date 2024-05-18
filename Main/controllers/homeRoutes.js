@@ -63,16 +63,18 @@ router.get('/products/:id',  async (req, res) => {
       order: [['customer_id', 'ASC']],
     });
     const customerVar = customerData.map((project) => project.get({ plain: true }));
-
+    
     res.render('productDetailsPage', {
       Products,
       customerVar,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
+      customer_id: req.session.customer_id
     });
     
   } catch (err) {
     res.status(500).json(err);
   }
+  console.log(this.window);
 });
 
 //shopping cart page

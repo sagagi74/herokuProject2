@@ -7,7 +7,9 @@ const buyProductQuantity = async (event) => {
     const product_id = urlArr[urlArr.length - 1];
 
     const total = 0; // has to be declared because part of table
-    const customer_id = 5;  // Assuming you have the customer ID available here
+    // this is getting the customer_id
+    const customer_id = parseInt(document.querySelector('#customerID').textContent);  // Assuming you have the customer ID available here
+    console.log(customer_id);
     const created_date = dayjs().format('YYYY-MM-DD HH:mm:ss');
     const ordered = 0; // has to be declared because part of table
     const transaction_id = 0; // has to be declared because part of table
