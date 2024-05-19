@@ -80,7 +80,6 @@ router.get('/products/:id',  async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //shopping cart page
 router.get('/shoppingCart', withAuth, async (req, res) => {
   try {
@@ -92,6 +91,7 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
         p.product_name,
         p.price,
         tm.total,
+        tm.transaction_id,
         COUNT(p.product_name) AS QTY,
         (SELECT SUM(p2.price) 
           FROM products p2
@@ -111,7 +111,7 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
       WHERE
         c.customer_id = ${req.session.customer_id} AND td.ordered = 0
       GROUP BY 
-        p.price, c.customer_id,p.product_url, p.product_name, tm.total
+        p.price, tm.transaction_id, c.customer_id,p.product_url, p.product_name, tm.total
       
     `;
     //running raw sql query
@@ -120,6 +120,7 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
     //passing it as an object 
     const serializedData = results.map((data) => ({
       product_name: data.product_name,
+      transaction_id: data.transaction_id,
       product_url: data.product_url,
       price: parseInt(data.price).toFixed(2),
       quantity: data.QTY,
@@ -152,7 +153,14 @@ router.get('/orderDetail/:id', withAuth, async (req, res) => {
     sum(p.price) as total,
     p.product_url,
 
-    COUNT(p.product_name) AS QTY
+    COUNT(p.product_name) AS QTY,
+    (SELECT SUM(p2.price) 
+    FROM products p2
+    JOIN transactionsdetails td2 ON p2.Product_id = td2.Product_id
+    JOIN transactionsmains tm2 ON td2.Transaction_id = tm2.Transaction_id
+    JOIN customers c2 ON tm2.customer_id = c2.customer_id
+    WHERE c2.customer_id = ${req.session.customer_id} AND td2.ordered = 1
+  ) AS totalPrice
   FROM 
     customers c
   JOIN 
@@ -173,9 +181,10 @@ router.get('/orderDetail/:id', withAuth, async (req, res) => {
       product_id: data.product_id,
       product_name: data.product_name,
       product_description: data.product_description,
-      total: data.total,
+      total: ( data.total *1.09).toFixed(2),
       product_url: data.product_url,
       Qty: data.QTY,
+      finalPrice: (data.totalPrice * 1.09).toFixed(2),
       singlePrice: data.total / data.QTY            
     }));
 
@@ -198,9 +207,9 @@ router.get('/ordermain', withAuth, async (req, res) => {
       tm.created_date,
       c.customer_id,
     
-    
-      SUM(p.price) AS total_price,
-      tm.ordered
+      tm.ordered,
+      SUM(p.price) AS total_price
+      
   FROM 
       customers c
   JOIN 
@@ -224,8 +233,8 @@ router.get('/ordermain', withAuth, async (req, res) => {
       customer_id : data.customer_id,
       first_name: data.first_name,
       last_name: data.last_name,
-      total: data.total_price,
-      ordered: data.ordered,
+      total:( data.total_price *1.09).toFixed(2),
+      ordered: data.ordered
       
     }));
 
@@ -240,10 +249,44 @@ router.get('/ordermain', withAuth, async (req, res) => {
 
 
 
-router.get('/transactionComplete', withAuth, (req,res) => {
-  
-  res.render('transactionComplete',{
-    loggedIn: req.session.loggedIn
-  });
+router.get('/transactionComplete/:id', withAuth, async (req,res) => {
+  try {
+    
+    const sqlQuery = `
+    SELECT 
+      tm.transaction_id,
+	    sum(p.price) * 1.09 as total
+     
+      FROM 
+        customers c
+      JOIN 
+        transactionsmains tm ON c.customer_id = tm.customer_id
+      JOIN 
+        transactionsdetails td ON tm.Transaction_id = td.Transaction_id
+      JOIN 
+        products p ON td.Product_id = p.Product_id
+        
+	 where 
+     tm.transaction_id = ${req.params.id}
+       GROUP BY 
+         tm.transaction_id;
+    `;
+
+    console.log(sqlQuery);
+    const [results] = await sequelize.query(sqlQuery);
+    console.log(results);
+    const serializedData = results.map((data) => ({
+      transaction_id: data.transaction_id,
+      total: parseFloat( data.total).toFixed(2)
+      
+    }));
+
+    res.render('transactionComplete', { 
+      data: serializedData,
+      loggedIn: req.session.loggedIn
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 module.exports = router;
