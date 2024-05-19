@@ -37,7 +37,7 @@ const buyProductQuantity = async (event) => {
                 });
                 const result = await response.json();
                 if (result.success) {
-                    console.log('Data inserted successfully:', result);
+                    alert('Product added to cart!');
                 } else {
                     console.error('Error inserting data:', result.error);
                 }
