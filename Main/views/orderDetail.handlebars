@@ -1,4 +1,4 @@
-   <style>
+<style>
 body {
     background-color: #f8f9fa;
     font-family: 'Arial', sans-serif;
@@ -9,13 +9,11 @@ h2 {
     color: #343a40;
 }
 
-
 .order-card {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .card-body {
     background-color: white;
@@ -23,14 +21,11 @@ h2 {
     
 }
 
-
 /*add border radius to the images and shadow*/
 .order-image {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
 
 /*
 this is adding color the text
@@ -48,7 +43,7 @@ this is adding color the text
     margin-bottom: 20px;
 }
 
-  </style>
+</style>
  
  <div class="container mt-5">
     <div class="row">
@@ -57,16 +52,9 @@ this is adding color the text
         <div class="card order-card mb-4">
           {{#each data as |order| }}
           <div class="card-header">
-            {{order.transaction_id}}
+            Order Number: #{{order.transaction_id}}
           </div>
-
-
           <div class="card-body">
-   
-
-                
-
-
                      <div class="row">
                     <div class="col-md-4">
                         <img src="{{order.product_url}}" class="img-fluid order-image" alt="Order Image">
@@ -74,21 +62,12 @@ this is adding color the text
                     <div class="col-md-8">
                         <ul class="list-group">
                             <li class="list-group-item"><strong>Item: </strong> {{order.product_name}}</li>
-                               <li class="list-group-item"><strong>Discription:</strong> ${{order.product_description}}</li>
-                            <li class="list-group-item"><strong>Total:</strong> ${{order.total}}</li>
-                         
+                               <li class="list-group-item"><strong>Description:</strong> {{order.product_description}}</li>
+                            <li class="list-group-item"><strong>Total:</strong> ${{order.total}} ({{order.Qty}} @ {{order.singlePrice}})</li>                         
                         </ul>
                     </div>
                 </div>
-
-
             {{/each}}
-           
-          
             </div>
-
-      
       </div>
-
-
       

@@ -3,7 +3,7 @@
     {{#if loggedIn}}
         {{#each Products as |Product| }}
             <div class="col-3 border border-secondary" style="">
-                <a class="cursor-pointer" href="/products/{{Product.product_id}}">
+                <a class="cursor-pointer text-decoration-none" href="/products/{{Product.product_id}}">
                     <div class="d-block mt-4 mx-auto" style="width: 90%; height: 220px; overflow: hidden;">
                         <img src="{{Product.product_url}}" style="width: 100%;" alt="" />
                     </div>
@@ -15,7 +15,7 @@
     {{else}}
         {{#each Products as |Product| }}
             <div class="col-3 border border-secondary" style="">
-                <a class="cursor-pointer" href="/products/{{Product.product_id}}">
+                <a class="cursor-pointer text-decoration-none" href="/products/{{Product.product_id}}">
                     <div class="d-block mt-4 mx-auto" style="width: 90%; height: 220px; overflow: hidden;">
                         <img src="{{Product.product_url}}" style="width: 100%;" alt="" />
                     </div>
