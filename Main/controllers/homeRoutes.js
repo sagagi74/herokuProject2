@@ -93,7 +93,7 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
           JOIN transactionsdetails td2 ON p2.Product_id = td2.Product_id
           JOIN transactionsmains tm2 ON td2.Transaction_id = tm2.Transaction_id
           JOIN customers c2 ON tm2.customer_id = c2.customer_id
-          WHERE c2.customer_id = ${req.session.customer_id}
+          WHERE c2.customer_id = ${req.session.customer_id} AND td2.ordered = 0
         ) AS totalPrice
       FROM 
         customers c
