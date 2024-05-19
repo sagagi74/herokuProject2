@@ -74,7 +74,6 @@ router.get('/products/:id',  async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  console.log(this.window);
 });
 
 //shopping cart page
