@@ -46,10 +46,10 @@
               <p>Tax: {{data.[0].tax}}%</p><br>
               <p>Total: ${{data.[0].finalPrice}}</p>
               <button type="button" id="backToProduct" class="btn btn-light btn-lg btn-block ">Continue Shopping</button> <br>
-              <button type="button" id="transaction" class="btn btn-dark btn-lg btn-block ">Buy! Buy! Buy!</button>
+              <button type="button" id="transaction" class="btn btn-dark btn-lg btn-block " data-href="/transactionComplete/{{data.[0].transaction_id}}" >Buy! Buy! Buy!</button>
             </div>
     </div>
 </main>
 
-<script src="/js/shoppingCart.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/shoppingCart.js"></script>
