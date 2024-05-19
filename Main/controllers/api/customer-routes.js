@@ -10,11 +10,8 @@ router.post('/', async (req, res) => {
       email_address: req.body.email_address,
       password: req.body.password,
     });
-
-    // Set up sessions with a 'loggedIn' variable set to `true`
+    
     req.session.save(() => {
-      req.session.loggedIn = true;
-
       res.status(200).json(dbCustomerData);
     });
   } catch (err) {
