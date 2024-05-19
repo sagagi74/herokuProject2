@@ -10,12 +10,12 @@ document
     .querySelector('#transaction')
     .addEventListener("click", async () => {
         try {
-            await fetch('/api/transaction/', {
-                method: 'POST',
+            await fetch('/api/transaction/complete', {
+                method: 'PUT',
             });
           } catch (err) {
             console.log('Error on POST');
-          }
+        }
         document.location.replace('/transactionComplete');
         
     });

@@ -104,7 +104,7 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
       JOIN 
         products p ON td.Product_id = p.Product_id
       WHERE
-       c.customer_id = ${req.session.customer_id}
+        c.customer_id = ${req.session.customer_id} AND td.ordered = 0
       GROUP BY 
         p.price, c.customer_id,p.product_url, p.product_name, tm.total
       
@@ -116,10 +116,10 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
     const serializedData = results.map((data) => ({
       product_name: data.product_name,
       product_url: data.product_url,
-      price: data.price,
+      price: parseInt(data.price).toFixed(2),
       quantity: data.QTY,
-      totalCost: data.price * data.QTY,
-      subtotalPrice: data.totalPrice,
+      totalCost: parseInt(data.price * data.QTY).toFixed(2),
+      subtotalPrice: parseInt(data.totalPrice).toFixed(2),
       tax: 9,
       finalPrice: (data.totalPrice * 1.09).toFixed(2)     
     }));
@@ -157,7 +157,9 @@ router.get('/ordermain', withAuth, async (req, res) => {
       transactionsdetails td ON tm.transaction_id = td.transaction_id
   JOIN 
       products p ON td.product_id = p.product_id
-  where c.customer_id = ${req.session.customer_id}
+
+  where c.customer_id = ${req.session.customer_id} AND tm.ordered = 1
+
   GROUP BY 
       tm.transaction_id,tm.created_date, c.customer_id;
     `;
