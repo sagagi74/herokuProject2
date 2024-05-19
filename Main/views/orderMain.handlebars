@@ -1,22 +1,12 @@
-<style>
 
-.clickable-row {
-    cursor: pointer;
-}
-
-.clickable-row:hover {
-    background-color: #f1f1f1;
-}
-
-</style> 
     
     
- <div class="container-fluid mt-5">
+ <div class="containerFluid mt-5">
         <h1 class="mb-4">Order History</h1>
         <div class="row">
             <div class="col-lg-10 mx-auto">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="tableResponsive">
+                    <table class="table tableBordered">
                         <thead>
                             <tr>
                                 <th scope="col">Order ID</th>
@@ -27,7 +17,7 @@
                         <tbody>
                             {{#each data as |order|}}
                             <!-- Making each row clickable and waht ever row is clicked that id will go to api to display that specific orders -->
-                                <tr class="clickable-row" data-href="/orderDetail/{{order.transaction_id}}" target="blank">
+                                <tr class="clickableRow" data-href="/orderDetail/{{order.transaction_id}}" target="blank">
                                     <td>{{order.transaction_id}}</td>
                                     <td>{{order.created_date}}</td>
                                     <td>${{order.total}}</td>
@@ -42,7 +32,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function($) {
-            $(".clickable-row").click(function() {
+            $(".clickableRow").click(function() {
                 window.location = $(this).data("href");
             });
         });
