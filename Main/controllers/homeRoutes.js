@@ -135,7 +135,6 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
   }
 });
 
-
 router.get('/ordermain', withAuth, async (req, res) => {
   try {
     
@@ -220,9 +219,8 @@ router.get('/orderDetail/:id', withAuth, async (req, res) => {
       product_description: data.product_description,
       total: data.total,
       product_url: data.product_url,
-      Qty: data.Qty
-      
-      
+      Qty: data.QTY,
+      singlePrice: data.total / data.QTY            
     }));
 
     res.render('orderdetail', { 
@@ -236,7 +234,6 @@ router.get('/orderDetail/:id', withAuth, async (req, res) => {
 
 router.get('/transactionComplete', withAuth, (req,res) => {
   
-
   res.render('transactionComplete',{
     loggedIn: req.session.loggedIn
   });
