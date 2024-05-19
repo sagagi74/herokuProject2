@@ -140,6 +140,53 @@ router.get('/shoppingCart', withAuth, async (req, res) => {
   }
 });
 
+router.get('/orderDetail/:id', withAuth, async (req, res) => {
+  try {
+    
+    const sqlQuery = `
+    SELECT 
+    tm.transaction_id,
+    p.product_id,
+    p.product_name,
+    p.product_description,
+    sum(p.price) as total,
+    p.product_url,
+
+    COUNT(p.product_name) AS QTY
+  FROM 
+    customers c
+  JOIN 
+    transactionsmains tm ON c.customer_id = tm.customer_id
+  JOIN 
+    transactionsdetails td ON tm.Transaction_id = td.Transaction_id
+  JOIN 
+    products p ON td.Product_id = p.Product_id
+    where tm.transaction_id = ${req.params.id}
+  GROUP BY 
+     p.product_id,tm.transaction_id, p.product_name, p.product_description, p.product_url;
+    `;
+
+    const [results] = await sequelize.query(sqlQuery);
+
+    const serializedData = results.map((data) => ({
+      transaction_id: data.transaction_id,
+      product_id: data.product_id,
+      product_name: data.product_name,
+      product_description: data.product_description,
+      total: data.total,
+      product_url: data.product_url,
+      Qty: data.QTY,
+      singlePrice: data.total / data.QTY            
+    }));
+
+    res.render('orderdetail', { 
+      data: serializedData,
+      loggedIn: req.session.loggedIn 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 router.get('/ordermain', withAuth, async (req, res) => {
   try {
     
@@ -191,53 +238,7 @@ router.get('/ordermain', withAuth, async (req, res) => {
   }
 });
 
-router.get('/orderDetail/:id', withAuth, async (req, res) => {
-  try {
-    
-    const sqlQuery = `
-    SELECT 
-    tm.transaction_id,
-    p.product_id,
-    p.product_name,
-    p.product_description,
-    sum(p.price) as total,
-    p.product_url,
 
-    COUNT(p.product_name) AS QTY
-  FROM 
-    customers c
-  JOIN 
-    transactionsmains tm ON c.customer_id = tm.customer_id
-  JOIN 
-    transactionsdetails td ON tm.Transaction_id = td.Transaction_id
-  JOIN 
-    products p ON td.Product_id = p.Product_id
-    where tm.transaction_id = ${req.params.id}
-  GROUP BY 
-     p.product_id,tm.transaction_id, p.product_name, p.product_description, p.product_url;
-    `;
-
-    const [results] = await sequelize.query(sqlQuery);
-
-    const serializedData = results.map((data) => ({
-      transaction_id: data.transaction_id,
-      product_id: data.product_id,
-      product_name: data.product_name,
-      product_description: data.product_description,
-      total: data.total,
-      product_url: data.product_url,
-      Qty: data.QTY,
-      singlePrice: data.total / data.QTY            
-    }));
-
-    res.render('orderdetail', { 
-      data: serializedData,
-      loggedIn: req.session.loggedIn 
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get('/transactionComplete', withAuth, (req,res) => {
   
