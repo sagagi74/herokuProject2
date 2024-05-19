@@ -1,4 +1,5 @@
 const buyProductQuantity = async (event) => {
+    let numOfAlerts = '';
     event.preventDefault();
 
     // gets the quantity entered by the user
@@ -37,7 +38,11 @@ const buyProductQuantity = async (event) => {
                 });
                 const result = await response.json();
                 if (result.success) {
-                    alert('Product added to cart!');
+                    if (numOfAlerts  === '') {
+                        numOfAlerts = 'Product has been added to your shopping cart.';
+                        alert(numOfAlerts);
+                    } else {
+                    }
                 } else {
                     console.error('Error inserting data:', result.error);
                 }
