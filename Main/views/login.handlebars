@@ -1,111 +1,32 @@
 <head>
-    <!-- <link rel="stylesheet" href="/css/login.css"> -->
-    <link rel="stylesheet" href="/css/loginTest.css">
+    <link rel="stylesheet" href="/css/navAndFooter.css">
 </head>
 
 <div class="wrapper">
-    <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
-    <div class="form-box login">
-      <h2>Login</h2>
-      <form>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input id="email-login" type="email" required>
-          <label>Email</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input id="password-login" type="password" required>
-          <label>Password</label>
-        </div>
-        <div class="remember-forgot">
-          <label><input type="checkbox"> Remember me</label>
-          <a href="#">Forgot Password?</a>
-        </div>
-        <button type="button" class="btn login-form-submit login-form">Login</button>
-        <div class="login_register">
-          <p>Don't have an account?<a href="#" class="register_link"> Register</a></p>
-        </div>
-      </form>
-    </div>
-
-    <div class="form-box register">
-      <h2>Registration</h2>
-      <form>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-          <input id="create-username-login" class="first-name-signup" type="text" required>
-          <label>First Name</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-          <input id="create-username-login" class="last-name-signup" type="text" required>
-          <label>Last Name</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-          <input id="create-email-login" class="email-signup" type="email" required>
-          <label>Email</label>
-        </div>
-        <div class ="input-box">
-          <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <input ="create-password-login" class="password-signup" type="password" required>
-          <label>Password</label>
-        </div>
-        <div class="remember-forgot">
-          <label><input type="checkbox"> I agree to the terms & conditions</label>
-        </div>
-        <button type="button" class="btn register_submit signup-form">Register</button>
-        <div class="login_register">
-          <p>Already have an account?<a href="#" class="login_link"> Login</a></p>
-        </div>
-      </form>
-    </div>
-  </div>
-
-<!--
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">Email:</label>
-        <input class="form-input" type="text" id="email-login" />
+  <div class="form-box login">
+    <h2>Login</h2>
+    <form>
+      <div class="input-box">
+        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+        <input id="email-login" type="text" required>
+        <label>Email</label>
       </div>
-      <div class="form-group">
-        <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="password-login" />
+      <div class="input-box">
+        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+        <input id="password-login" type="password" required>
+        <label>Password</label>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
+      <div class="remember-forgot">
+        <a href="#">Forgot Password?</a>
       </div>
-    </form>
-  </div>
-  <div class="login-card">
-    <h2 class="page-title">Signup</h2>
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="first-name-signup">First Name:</label>
-        <input class="form-input" type="text" id="first-name-signup" />
-      </div>
-      <div class="form-group">
-        <label for="last-name-signup">Last Name:</label>
-        <input class="form-input" type="text" id="last-name-signup" />
-      </div>
-      <div class="form-group">
-        <label for="email-signup">Email:</label>
-        <input class="form-input" type="text" id="email-signup" />
-      </div>
-      <div class="form-group">
-        <label for="password-signup">Password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
+      <button type="button" class="btn login-form">Login</button>
+      <div class="login_register">
+        <p>Don't have an account?<a href="/register" class="register_link"> Register</a></p>
       </div>
     </form>
   </div>
 </div>
--->
 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/js/login.js"></script>

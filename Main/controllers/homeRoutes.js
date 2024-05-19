@@ -17,6 +17,11 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// Register route
+router.get('/register', (req, res) => {
+  res.render('register');
+});
+
 // Logout route
 router.get('/logout', (req, res) => {
   if (!req.session.loggedIn) {
