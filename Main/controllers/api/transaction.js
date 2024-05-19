@@ -2,7 +2,6 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection.js');
 
 router.put('/complete', async (req, res) => {
-    console.log(req.session.customer_id)
     try {
         // Disable SQL_SAFE_UPDATES
         await sequelize.query('SET SQL_SAFE_UPDATES = 0;');
