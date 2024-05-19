@@ -1,5 +1,5 @@
 const signupFormHandler = async (event) => {
-  event.preventDefault();
+  // event.preventDefault();
 
   const firstName = document.querySelector('.first-name-signup').value.trim();
   const lastName = document.querySelector('.last-name-signup').value.trim();
@@ -19,7 +19,12 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      const response = await fetch('/api/customer/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      document.location.replace('/login');
     } else {
       alert('Failed to sign up.');
     }
