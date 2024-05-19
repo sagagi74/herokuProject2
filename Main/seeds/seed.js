@@ -1,8 +1,5 @@
 const sequelize = require('../config/connection');
-const {Product} = require('../models');
-const {Customers} = require('../models');
-const {TransactionsDetail} = require('../models');
-const {TransactionsMain} = require('../models');
+const {Product, Customers, TransactionsDetail, TransactionsMain} = require('../models');
 
 const productData = require('./productData.json');
 const customerData = require('./customerData.json');
